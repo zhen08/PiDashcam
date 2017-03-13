@@ -13,6 +13,7 @@ namespace PiDashcam
 
 		public StillCam(string imageFolder)
 		{
+			imgcounter = 1;
 			folder = imageFolder;
 			if (!Directory.Exists(folder))
 			{
@@ -29,7 +30,6 @@ namespace PiDashcam
 			timer = new Timer(6000);
 			timer.Elapsed += Timer_Elapsed;
 			timer.Start();
-			imgcounter = 1;
 		}
 
 		public void Stop()
