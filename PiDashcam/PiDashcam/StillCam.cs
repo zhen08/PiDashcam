@@ -24,7 +24,7 @@ namespace PiDashcam
 
 		void Timer_Elapsed(object sender, ElapsedEventArgs e)
 		{
-			ProgramLauncher.Execute("raspistill", String.Format("-h 1920 -v 1080 -n -o {0}.jpg",imgcounter++));
+			ProgramLauncher.Execute("raspistill", String.Format("-h 1080 -w 1920 -n -o {0}.jpg",imgcounter++));
 		}
 	}
 }
