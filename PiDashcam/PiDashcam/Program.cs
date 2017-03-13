@@ -6,12 +6,8 @@ namespace PiDashcam
 	{
 		public static void Main(string[] args)
 		{
-			Console.WriteLine("PiDashcam started");
 			var stillCam = new StillCam("image");
-			while (Console.ReadKey().KeyChar != 'q')
-			{
-			}
-			stillCam.Stop();
+			while (true) ;
 		}
 	}
 }
