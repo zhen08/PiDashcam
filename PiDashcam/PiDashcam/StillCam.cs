@@ -11,7 +11,7 @@ namespace PiDashcam
 
 		public StillCam()
 		{
-			timer = new Timer(10000);
+			timer = new Timer(6000);
 			timer.Elapsed += Timer_Elapsed;
 			timer.Start();
 			imgcounter = 1;
@@ -24,7 +24,7 @@ namespace PiDashcam
 
 		void Timer_Elapsed(object sender, ElapsedEventArgs e)
 		{
-			ProgramLauncher.Execute("raspistill", String.Format("-o {0}.jpg",imgcounter++));
+			ProgramLauncher.Execute("raspistill", String.Format("-h 1920 -v 1080 -n -o {0}.jpg",imgcounter++));
 		}
 	}
 }
