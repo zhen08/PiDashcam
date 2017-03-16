@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 
 namespace PiDashcam
 {
@@ -7,7 +8,9 @@ namespace PiDashcam
 		public static void Main(string[] args)
 		{
 			var stillCam = new StillCam("image");
-			while (true) ;
+			while (true) {
+				Thread.Sleep(60000);
+			}
 		}
 	}
 }
