@@ -1,15 +1,17 @@
 ﻿using System;
 using System.IO;
+using System.Threading;
 using System.Timers;
 using Shell.Execute;
 
 namespace PiDashcam
 {
-	public class StillCam
+	public class StillCam: IRecorder
 	{
-		Timer timer;
+		System.Timers.Timer timer;
 		int imgcounter;
 		string folder;
+		volatile bool capturing;
 
 		public StillCam(string imageFolder)
 		{
@@ -27,20 +29,32 @@ namespace PiDashcam
 					imgcounter = count + 1;
 				}
 			}
-			timer = new Timer(6000);
+			int interval = PiDashcamSettings.Load().StillCamInterval;
+			timer = new System.Timers.Timer(interval);
 			timer.Elapsed += Timer_Elapsed;
+			timer.Start();
+		}
+
+		void Timer_Elapsed(object sender, ElapsedEventArgs e)
+		{
+			capturing = true;
+			ProgramLauncher.Execute("raspistill", String.Format("-h 1080 -w 1920 -n -o {0}/{1}.jpg", folder, imgcounter.ToString("D8")));
+			imgcounter++;
+			capturing = false;
+		}
+
+		public void Start()
+		{
 			timer.Start();
 		}
 
 		public void Stop()
 		{
+			while (capturing)
+			{
+				Thread.Sleep(100);
+			}
 			timer.Stop();
-		}
-
-		void Timer_Elapsed(object sender, ElapsedEventArgs e)
-		{
-			ProgramLauncher.Execute("raspistill", String.Format("-h 1080 -w 1920 -n -o {0}/{1}.jpg", folder, imgcounter.ToString("D8")));
-			imgcounter++;
 		}
 	}
 }
