@@ -1,11 +1,11 @@
 sudo apt-get update
 sudo apt-get -y upgrade
 sudo apt-get -y install build-essential cmake pkg-config
-sudo apt-get install libjpeg-dev libtiff5-dev libjasper-dev libpng12-dev
-sudo apt-get install libavcodec-dev libavformat-dev libswscale-dev libv4l-dev
-sudo apt-get install libxvidcore-dev libx264-dev
-sudo apt-get install libgtk2.0-dev
-sudo apt-get install libatlas-base-dev gfortran
+sudo apt-get -y install libjpeg-dev libtiff5-dev libjasper-dev libpng12-dev
+sudo apt-get -y install libavcodec-dev libavformat-dev libswscale-dev libv4l-dev
+sudo apt-get -y install libxvidcore-dev libx264-dev
+sudo apt-get -y install libgtk2.0-dev
+sudo apt-get -y install libatlas-base-dev gfortran
 
 cd ~
 wget -O opencv.zip https://github.com/Itseez/opencv/archive/3.2.0.zip
